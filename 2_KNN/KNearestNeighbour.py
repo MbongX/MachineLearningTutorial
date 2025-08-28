@@ -19,7 +19,7 @@ le = preprocessing.LabelEncoder()
 buying = le.fit_transform(list(data["buying"]))
 maint = le.fit_transform(list(data["maint"]))
 door = le.fit_transform(list(data["door"]))
-persons = le.fir_transform(list(data["person"]))
+persons = le.fit_transform(list(data["persons"]))
 lug_boot = le.fit_transform(list(data["lug_boot"]))
 safety = le.fit_transform(list(data["safety"]))
 cls = le.fit_transform(list(data["class"]))
@@ -38,3 +38,34 @@ features_train,features_test,labels_train,labels_test = sklearn.model_selection.
 
 #basically we converted non-numeric values into numeric values and split the dataset into features and labels
 
+#creation of the classifier
+model = KNeighborsClassifier(n_neighbors=3) #accepts only one input param of K neighbour:int (Amount of neighbors-> this a hyper parameters, meaning we can tweak it as we train the model)
+
+#train the model
+model.fit(features_train,labels_train)
+
+#get the model's accuracy
+accuracy = model.score(features_test,labels_test)
+
+#Model Accuracy
+print(f"Model Accuracy Score = {accuracy}")
+
+#getting the predicted data
+prediction = model.predict(features_test)
+
+#let's see the data point, predictions and actual values
+
+#create a list for our classifier -> since it uses number we need to convert those to names
+
+names = ["unacc", "acc", "good", "vgood"]
+
+for x in range(len(prediction)):
+    print(f"Predicted value : {names[prediction[x]]}"
+          f"\nDataset : {features_test[x]}"
+          f"\nActual : {names[labels_test[x]]}"
+          f"\n=========================================")
+    #getting the K neighbors
+    kn=model.kneighbors([features_test[x]], 9, True) #first param is a 2d array -> if not present we wrap an array within an array like what i did, followed the number of neighbours near, True/False -> return index for all neighbours
+    print(f"===========================================\n"
+          f"Prinining out all the neighbor near the current point {x}:"
+          f"\n{kn}\n")
