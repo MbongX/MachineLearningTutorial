@@ -30,7 +30,7 @@ cls = le.fit_transform(list(data["class"]))
 predict = "class"
 
 #create our features and labels
-features = list(zip(buying,maint,door,persons,lug_boot,safety,cls)) #converting the zip tuple (combination of multiple arrays) -> then converting it into a list
+features = list(zip(buying,maint,door,persons,lug_boot,safety)) #converting the zip tuple (combination of multiple arrays) -> then converting it into a list
 labels = list(cls) #converting the cls array into a list
 
 #time to split the data into test and trainng set plus defin the ratio between training:test
