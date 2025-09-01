@@ -65,3 +65,4 @@ clf = KMeans(n_clusters=k,init="k-means++", n_init=100,max_iter=6000) #this clas
 #now we will pass our classfier into function bench_k_means():
 bench_k_means(clf,"1",data) #we can give/pass in a random name it seems
 
+#Moving on to Neural Network [0_-]
